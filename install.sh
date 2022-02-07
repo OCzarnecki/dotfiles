@@ -2,4 +2,7 @@
 
 # nvim
 mkdir -p ~/.config/nvim/
-ln -f -b -s "$HOME/develop/dotfiles/init.vim" ~/.config/nvim/init.vim 
+ln -fbs "$HOME/develop/dotfiles/init.vim" ~/.config/nvim/init.vim
+
+# zsh
+ln -fbs "$HOME/develop/dotfiles/zshrc" ~/.zshrc
