@@ -14,5 +14,12 @@ ln -fbs "$SRC_DIR/init.vim" ~/.config/nvim/init.vim
 # zsh
 ln -fbs "$SRC_DIR/zshrc" ~/.zshrc
 
+### Global system configuration.
+
+# faillock.conf
+chown root:root "$SRC_DIR/faillock.conf"
+ln -fbs "$SRC_DIR/faillock.conf" "/etc/security/faillock.conf"
+
 # logind.conf
+chown root:root "$SRC_DIR/logind.conf"
 ln -fbs "$SRC_DIR/logind.conf" "/etc/systemd/logind.conf"
