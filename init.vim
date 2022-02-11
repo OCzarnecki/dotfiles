@@ -118,6 +118,11 @@ local opts = {
 }
 
 require('rust-tools').setup(opts)
+nvim_lsp.texlab.setup{}
+nvim_lsp.pylsp.setup{}
+
+-- Set up other language servers
+
 EOF
 
 " Code navigation shortcuts
