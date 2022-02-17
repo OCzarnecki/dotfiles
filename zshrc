@@ -64,4 +64,4 @@ alias gtc='git commit -a'
 
 # Path
 # export PATH="$HOME/.node_modules_global/bin:$PATH"
-export PATH="$PATH:$GEM_HOME/bin"
+export PATH="$PATH:$GEM_HOME/bin:$HOME/.bin"
