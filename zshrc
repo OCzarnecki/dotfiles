@@ -45,6 +45,7 @@ source /usr/share/fzf/completion.zsh
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export TERMINAL=alacritty
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 
 # Aliases
 alias cd..='cd ..'
@@ -63,4 +64,4 @@ alias gtc='git commit -a'
 
 # Path
 # export PATH="$HOME/.node_modules_global/bin:$PATH"
-export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+export PATH="$PATH:$GEM_HOME/bin"
