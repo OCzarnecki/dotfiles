@@ -60,11 +60,16 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Some color scheme other then default
-Plug 'arcticicestudio/nord-vim'
+"Plug 'arcticicestudio/nord-vim'
+Plug 'ful1e5/onedark.nvim'
+
+"HTML snippets
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
-colorscheme nord
+" colorscheme nord
+colorscheme onedark
 
 " Set completeopt to have a better completion experience
 " :help completeopt
