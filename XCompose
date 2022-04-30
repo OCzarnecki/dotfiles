@@ -1,0 +1,36 @@
+include "%L"
+# Greek letters
+<Multi_key> <g> <G> : "Γ" # greek uppercase 
+<Multi_key> <g> <D> : "Δ" # greek uppercase 
+<Multi_key> <g> <T> : "Θ" # greek uppercase 
+<Multi_key> <g> <L> : "Λ" # greek uppercase 
+<Multi_key> <g> <X> : "Ξ" # greek uppercase 
+<Multi_key> <g> <P> <i> : "Π" # greek uppercase 
+<Multi_key> <g> <S> : "Σ" # greek uppercase 
+<Multi_key> <g> <P> <h> : "Φ" # greek uppercase 
+<Multi_key> <g> <P> <s> : "Ψ" # greek uppercase 
+<Multi_key> <g> <O> : "Ω" # greek uppercase 
+<Multi_key> <g> <a> : "α" # greek lowercase alpha
+<Multi_key> <g> <b> : "β" # greek lowercase 
+<Multi_key> <g> <g> : "γ" # greek lowercase 
+<Multi_key> <g> <d> : "δ" # greek lowercase 
+<Multi_key> <g> <e> <p> : "ε" # greek lowercase 
+<Multi_key> <g> <z> : "ζ" # greek lowercase 
+<Multi_key> <g> <e> <t> : "η" # greek lowercase 
+<Multi_key> <g> <t> <h> : "θ" # greek lowercase 
+<Multi_key> <g> <i> : "ι" # greek lowercase 
+<Multi_key> <g> <k> : "κ" # greek lowercase 
+<Multi_key> <g> <l> : "λ" # greek lowercase 
+<Multi_key> <g> <m> : "μ" # greek lowercase 
+<Multi_key> <g> <n> : "ν" # greek lowercase 
+<Multi_key> <g> <x> : "ξ" # greek lowercase 
+<Multi_key> <g> <o> : "ο" # greek lowercase 
+<Multi_key> <g> <p> <i> : "π" # greek lowercase 
+<Multi_key> <g> <r> : "ρ" # greek lowercase 
+<Multi_key> <g> <s> : "σ" # greek lowercase 
+<Multi_key> <g> <t> <a> : "τ" # greek lowercase 
+<Multi_key> <g> <u> : "υ" # greek lowercase 
+<Multi_key> <g> <p> <h> : "φ" # greek lowercase 
+<Multi_key> <g> <c> : "χ" # greek lowercase 
+<Multi_key> <g> <p> <s> : "ψ" # greek lowercase 
+<Multi_key> <g> <o> : "ω" # greek lowercase 
