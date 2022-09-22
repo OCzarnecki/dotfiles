@@ -128,7 +128,20 @@ require('rust-tools').setup(opts)
 nvim_lsp.bashls.setup{}
 nvim_lsp.gopls.setup{}
 nvim_lsp.texlab.setup{}
-nvim_lsp.pylsp.setup{}
+nvim_lsp.pylsp.setup{
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {
+            'W391', -- Blank line at the end of file
+            'E501'  -- Line too long
+          },
+        }
+      }
+    }
+  }
+}
 
 -- Set up other language servers
 
