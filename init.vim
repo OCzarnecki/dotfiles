@@ -133,6 +133,7 @@ nvim_lsp.pylsp.setup{
       plugins = {
         pycodestyle = {
           ignore = {
+            'W503', -- line break before binary operator
             'W391', -- Blank line at the end of file
             'E501'  -- Line too long
           },
