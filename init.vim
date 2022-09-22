@@ -8,7 +8,6 @@ set ruler              		" Show the cursor position all the time
 set iskeyword+=-          " treat dash separated words as a word text object"
 " Disable mouse input (bc it's annoying as hell with a touch pad)
 set mouse=
-set ttymouse=
 set splitbelow            " Horizontal splits will automatically be below
 set splitright            " Vertical splits will automatically be to the right
 set t_Co=256              " Support 256 colors
