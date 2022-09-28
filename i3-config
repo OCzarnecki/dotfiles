@@ -214,10 +214,10 @@ bindsym $mod+r mode "resize"
 # launch commonly used applications
 mode "launch" {
 	bindsym a exec --no-startup-id "anki", layout tabbed, mode "default"
-	bindsym c exec --no-startup-id "speedcrunch", mode "default"
+	bindsym c exec --no-startup-id "/usr/bin/alacritty -e ipython -i -c 'from math import *'", mode "default"
 	bindsym d exec --no-startup-id $launcher, mode "default"
 	bindsym f exec --no-startup-id "firefox", mode "default"
-	bindsym k exec --no-startup-id "krusader", mode "default"
+  bindsym n exec --no-startup-id "/usr/bin/alacritty -e calendar_cli --config ~/.config/calendar_cli/config.yaml add", mode "default"
   bindsym o exec --no-startup-id "$HOME/.bin/choose-file-and-open okular pdf", mode "default"
 	bindsym q exec --no-startup-id "systemctl poweroff", mode "default"
 	bindsym r exec --no-startup-id "systemctl reboot", mode "default"
