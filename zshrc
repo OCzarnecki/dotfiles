@@ -60,7 +60,7 @@ alias vimr='vim -R'
 alias gts='git status'
 alias gta='git add'
 alias gtp='git push'
-alias gtc='git commit -a'
+alias gtc='git commit'
 
 # Path
 # export PATH="$HOME/.node_modules_global/bin:$PATH"
