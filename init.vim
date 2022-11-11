@@ -1,3 +1,5 @@
+
+" generic configuration {{{
 syntax enable             " Enables syntax highlighing
 set hidden                " Required to keep multiple buffers open
 set encoding=utf-8        " The encoding displayed
@@ -25,14 +27,11 @@ set updatetime=300        " Faster completion
 set timeoutlen=500        " By default timeoutlen is 1000 ms
 set formatoptions-=cro    " Stop newline continution of comments
 set nohlsearch            " Don't highlight search results
+set linebreak             " Wrap at word boundaries, instead of anywhere
 
-" Write with sudo
-cmap w!! w !sudo tee %
+" }}}
 
-"""""""""""
-" PLUGINS "
-"""""""""""
-
+" plugins {{{
 call plug#begin('~/.vim/plugged')
 
 " Collection of common configurations for the Nvim LSP client
@@ -56,8 +55,8 @@ Plug 'simrat39/rust-tools.nvim'
 Plug 'hrsh7th/vim-vsnip'
 
 " Optional
-"Plug 'nvim-lua/popup.nvim'
-"Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Some color scheme other then default
@@ -68,9 +67,41 @@ Plug 'ful1e5/onedark.nvim'
 Plug 'mattn/emmet-vim'
 
 call plug#end()
+" }}}
 
-" colorscheme nord
+" theme {{{
+" can only be set after plugins are loaded
 colorscheme onedark
+" }}}
+
+" generic bindings {{{
+let mapleader=" "
+
+" edit vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+" source vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" }}}
+
+" abbreviations {{{
+iabbrev improt import
+" }}}
+
+" filetype specific settings {{{
+augroup filetype_specific
+  autocmd!
+  " vim {{{
+  autocmd FileType vim :setlocal foldmethod=marker
+  " }}}
+  " rust {{{
+  autocmd FileType rust :setlocal foldmethod=syntax
+  " }}}
+augroup END
+" }}}
+
+" autocompletion & lsp {{{
 
 " Set completeopt to have a better completion experience
 " :help completeopt
@@ -85,15 +116,17 @@ set shortmess+=c
 " Configure LSP through rust-tools.nvim plugin.
 " rust-tools will configure and enable certain LSP features for us.
 " See https://github.com/simrat39/rust-tools.nvim#configuration
+
 lua <<EOF
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
 
-local opts = {
+local rust_opts = {
     tools = {
         autoSetHints = true,
-        hover_with_actions = true,
+        -- deprecated
+        -- hover_with_actions = true,
         runnables = {
             use_telescope = true
         },
@@ -123,7 +156,7 @@ local opts = {
     },
 }
 
-require('rust-tools').setup(opts)
+require('rust-tools').setup(rust_opts)
 nvim_lsp.bashls.setup{}
 nvim_lsp.gopls.setup{}
 nvim_lsp.texlab.setup{}
@@ -135,7 +168,8 @@ nvim_lsp.pylsp.setup{
           ignore = {
             'W503', -- line break before binary operator
             'W391', -- Blank line at the end of file
-            'E501'  -- Line too long
+            'E501', -- Line too long
+            'E741', -- Variables can't be named l or I
           },
         }
       }
@@ -143,9 +177,8 @@ nvim_lsp.pylsp.setup{
   }
 }
 
--- Set up other language servers
-
 EOF
+
 
 " Code navigation shortcuts
 " as found in :help lsp
@@ -162,6 +195,7 @@ nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 
 " Quick-fix
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+
 
 " Setup Completion
 " See https://github.com/hrsh7th/nvim-cmp#basic-configuration
@@ -212,4 +246,14 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
+
+" }}}
+
+" telescope {{{
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" }}}
+
 
