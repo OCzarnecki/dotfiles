@@ -38,6 +38,7 @@ prompt walters
 setopt nopromptcr
 
 # Fuzzy Search
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
