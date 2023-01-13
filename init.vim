@@ -66,6 +66,9 @@ Plug 'ful1e5/onedark.nvim'
 "HTML snippets
 Plug 'mattn/emmet-vim'
 
+"Fancy tables
+Plug 'dhruvasagar/vim-table-mode'
+
 call plug#end()
 " }}}
 
@@ -87,6 +90,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " abbreviations {{{
 iabbrev improt import
+iabbrev teh the
 " }}}
 
 " filetype specific settings {{{
