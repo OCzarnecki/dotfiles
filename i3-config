@@ -62,7 +62,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 bindsym XF86AudioNext exec --no-startup-id cmus-remote -n
 bindsym XF86AudioPrev exec --no-startup-id cmus-remote -r
-bindsym XF86AudioPlay exec --no-startup-id ~/.bin/toggle-play.sh
+bindsym XF86AudioPlay exec --no-startup-id ~/.bin/toggle-play.py
 
 # Adjust screen brightness
 bindsym XF86MonBrightnessUp exec /usr/bin/light -A 5
