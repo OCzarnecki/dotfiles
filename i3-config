@@ -221,7 +221,7 @@ mode "launch" {
 	bindsym d exec --no-startup-id $launcher, mode "default"
 	bindsym f exec --no-startup-id "firefox", mode "default"
   bindsym n exec --no-startup-id "/usr/bin/alacritty -e calendar_cli --config ~/.config/calendar_cli/config.yaml add", mode "default"
-  bindsym o exec --no-startup-id "$HOME/.bin/choose-file-and-open okular pdf", mode "default"
+  bindsym o exec --no-startup-id "$HOME/.bin/choose-file-and-open zathura pdf", mode "default"
 	bindsym q exec --no-startup-id "systemctl poweroff", mode "default"
 	bindsym r exec --no-startup-id "systemctl reboot", mode "default"
 	bindsym t exec --no-startup-id "thunderbird", mode "default"
@@ -291,3 +291,6 @@ exec --no-startup-id xkb-switch --i3
 # Start up quiet and muted
 exec --no-startup-id set-sink-mute @DEFAULT_SINK@ on && $refresh_i3status
 exec --no-startup-id set-sink-volume @DEFAULT_SINK@ 15% && $refresh_i3status
+
+# Update cmus cache
+exec --no-startup-id .bin/update-cmus-cache
