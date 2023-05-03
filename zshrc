@@ -62,7 +62,7 @@ alias grep='grep --color=auto'
 alias l='ls'
 alias ls='ls -1 --color=auto'
 alias lsl='ls -l --color=auto'
-alias o='okular'
+alias o='zathura'
 alias v='nvim'
 alias vim='nvim'
 alias vimr='vim -R'
@@ -70,6 +70,7 @@ alias gts='git status'
 alias gta='git add'
 alias gtp='git push'
 alias gtc='git commit'
+alias fd.='fd .'
 
 # Path
 # export PATH="$HOME/.node_modules_global/bin:$PATH"
