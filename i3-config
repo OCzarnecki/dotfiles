@@ -177,7 +177,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # lock screen
-bindsym $mod+Shift+v exec xautolock -locknow
+bindsym $mod+Shift+v exec "bash -c 'xautolock -enable; sleep 0.5; xautolock -locknow'"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -216,23 +216,23 @@ bindsym $mod+r mode "resize"
 
 # launch commonly used applications
 mode "launch" {
-	bindsym a exec --no-startup-id "anki", layout tabbed, mode "default"
-	bindsym c exec --no-startup-id "/usr/bin/alacritty -e ipython -i -c 'from math import *'", mode "default"
-	bindsym d exec --no-startup-id $launcher, mode "default"
-	bindsym f exec --no-startup-id "firefox", mode "default"
-  bindsym n exec --no-startup-id "/usr/bin/alacritty -e calendar_cli --config ~/.config/calendar_cli/config.yaml add", mode "default"
-  bindsym o exec --no-startup-id "$HOME/.bin/choose-file-and-open zathura pdf", mode "default"
+    bindsym a exec --no-startup-id "anki", layout tabbed, mode "default"
+    bindsym c exec --no-startup-id "/usr/bin/alacritty -e ipython -i -c 'from math import *'", mode "default"
+    bindsym d exec --no-startup-id $launcher, mode "default"
+    bindsym f exec --no-startup-id "firefox", mode "default"
+    bindsym n exec --no-startup-id "/usr/bin/alacritty -e calendar_cli --config ~/.config/calendar_cli/config.yaml add", mode "default"
+    bindsym o exec --no-startup-id "$HOME/.bin/choose-file-and-open zathura pdf", mode "default"
 	bindsym q exec --no-startup-id "systemctl poweroff", mode "default"
-	bindsym r exec --no-startup-id "systemctl reboot", mode "default"
-	bindsym t exec --no-startup-id "thunderbird", mode "default"
-	bindsym v exec --no-startup-id "$HOME/.bin/choose-file-and-open vlc ''", mode "default"
-	bindsym x exec --no-startup-id "killall Telegram Discord thunderbird liferea", mode "default"
-	bindsym z exec --no-startup-id "zim", mode "default"
-	bindsym Return exec --no-startup-id exec i3-sensible-terminal, mode "default"
+    bindsym r exec --no-startup-id "systemctl reboot", mode "default"
+    bindsym t exec --no-startup-id "thunderbird", mode "default"
+    bindsym v exec --no-startup-id "$HOME/.bin/choose-file-and-open vlc ''", mode "default"
+    bindsym x exec --no-startup-id "killall Telegram Discord thunderbird liferea", mode "default"
+    bindsym z exec --no-startup-id "zim", mode "default"
+    bindsym Return exec --no-startup-id exec i3-sensible-terminal, mode "default"
 
-  # back to normal: Enter or Escape or $mod+m
-  bindsym Escape mode "default"
-  bindsym $mod+m mode "default"
+    # back to normal: Enter or Escape or $mod+m
+    bindsym Escape mode "default"
+    bindsym $mod+m mode "default"
 
 }
 
