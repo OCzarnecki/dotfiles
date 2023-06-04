@@ -183,6 +183,7 @@ nvim_lsp.pylsp.setup{
     }
   }
 }
+nvim_lsp.jdtls.setup{}
 
 EOF
 
