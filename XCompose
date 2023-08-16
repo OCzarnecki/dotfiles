@@ -34,3 +34,7 @@ include "%L"
 <Multi_key> <g> <c> : "χ" # greek lowercase 
 <Multi_key> <g> <p> <s> : "ψ" # greek lowercase 
 <Multi_key> <g> <o> : "ω" # greek lowercase 
+
+# Maths
+<Multi_key> <|> <=> : "⊨" # double turnstile
+<Multi_key> <|> <-> <=> : "⊭" # double turnstile
