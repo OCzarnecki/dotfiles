@@ -217,7 +217,7 @@ bindsym $mod+r mode "resize"
 # launch commonly used applications
 mode "launch" {
     bindsym a exec --no-startup-id "anki", layout tabbed, mode "default"
-    bindsym c exec --no-startup-id "/usr/bin/alacritty -e ipython -i -c 'from math import *'", mode "default"
+    bindsym c exec --no-startup-id "~/.bin/ipython_calc/show_calc.sh", mode "default"
     bindsym d exec --no-startup-id $launcher, mode "default"
     bindsym f exec --no-startup-id "firefox", mode "default"
     bindsym n exec --no-startup-id "/usr/bin/alacritty -e calendar_cli --config ~/.config/calendar_cli/config.yaml add", mode "default"
@@ -294,3 +294,6 @@ exec --no-startup-id set-sink-volume @DEFAULT_SINK@ 15% && $refresh_i3status
 
 # Update cmus cache
 exec --no-startup-id .bin/update-cmus-cache
+
+# Pre-load ipython calc
+exec --no-startup-id .bin/ipython_calc/create_session.sh
