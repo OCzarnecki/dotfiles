@@ -1,7 +1,7 @@
 # Command history settings
 HISTFILE=~/.histfile
 HISTSIZE=1000
-SAVEHIST=50000
+SAVEHIST=100000
 setopt HIST_IGNORE_DUPS    # Don't save duplicates to history
 setopt HIST_IGNORE_SPACE   # Don't save entries starting with space
 
@@ -74,4 +74,4 @@ alias fd.='fd .'
 
 # Path
 # export PATH="$HOME/.node_modules_global/bin:$PATH"
-export PATH="$PATH:$GEM_HOME/bin:$HOME/.bin"
+export PATH="$PATH:$GEM_HOME/bin:$HOME/.bin:$HOME/.bin/scripts"

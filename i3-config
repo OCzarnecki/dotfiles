@@ -62,7 +62,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 bindsym XF86AudioNext exec --no-startup-id cmus-remote -n
 bindsym XF86AudioPrev exec --no-startup-id cmus-remote -r
-bindsym XF86AudioPlay exec --no-startup-id ~/.bin/toggle-play.py
+bindsym XF86AudioPlay exec --no-startup-id ~/.bin/scripts/toggle-play.py
 
 # Adjust screen brightness
 bindsym XF86MonBrightnessUp exec /usr/bin/light -A 5
@@ -221,11 +221,11 @@ mode "launch" {
     bindsym d exec --no-startup-id $launcher, mode "default"
     bindsym f exec --no-startup-id "firefox", mode "default"
     bindsym n exec --no-startup-id "/usr/bin/alacritty -e calendar_cli --config ~/.config/calendar_cli/config.yaml add", mode "default"
-    bindsym o exec --no-startup-id "$HOME/.bin/choose-file-and-open zathura pdf", mode "default"
+    bindsym o exec --no-startup-id "$HOME/.bin/scripts/choose-file-and-open zathura pdf", mode "default"
 	bindsym q exec --no-startup-id "systemctl poweroff", mode "default"
     bindsym r exec --no-startup-id "systemctl reboot", mode "default"
     bindsym t exec --no-startup-id "thunderbird", mode "default"
-    bindsym v exec --no-startup-id "$HOME/.bin/choose-file-and-open vlc ''", mode "default"
+    bindsym v exec --no-startup-id "$HOME/.bin/scripts/choose-file-and-open vlc ''", mode "default"
     bindsym x exec --no-startup-id "killall Telegram Discord thunderbird liferea", mode "default"
     bindsym z exec --no-startup-id "zim", mode "default"
     bindsym Return exec --no-startup-id exec i3-sensible-terminal, mode "default"
@@ -241,7 +241,7 @@ bindsym $mod+m mode "launch"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command .bin/i3status-wrapper
+        status_command .bin/scripts/i3status-wrapper
         mode hide
         position top
         font pango:DejaVu Sans Mono 12
@@ -269,10 +269,10 @@ bindsym Shift+$mod+f exec xset r rate 250 50
 exec --no-startup-id xset s off
 
 # Lock screen
-exec --no-startup-id xautolock -time 20 -locker '$HOME/.bin/lock'
+exec --no-startup-id xautolock -time 20 -locker '$HOME/.bin/scripts/lock'
 
 # Detect second monitor
-exec --no-startup-id $HOME/.bin/hotplug-monitor-update
+exec --no-startup-id $HOME/.bin/scripts/hotplug-monitor-update
 
 # Start with workspace 1: doesn't work for some reason
 #exec --no-startup-id i3-msg workspace 1
@@ -293,7 +293,7 @@ exec --no-startup-id set-sink-mute @DEFAULT_SINK@ on && $refresh_i3status
 exec --no-startup-id set-sink-volume @DEFAULT_SINK@ 15% && $refresh_i3status
 
 # Update cmus cache
-exec --no-startup-id .bin/update-cmus-cache
+exec --no-startup-id .bin/scripts/update-cmus-cache
 
 # Pre-load ipython calc
 exec --no-startup-id .bin/ipython_calc/create_session.sh
