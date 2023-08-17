@@ -216,7 +216,7 @@ bindsym $mod+r mode "resize"
 
 # launch commonly used applications
 mode "launch" {
-    bindsym a exec --no-startup-id "anki", layout tabbed, mode "default"
+    bindsym a exec --no-startup-id "~/.bin/scripts/start_anki.sh", layout tabbed, mode "default"
     bindsym c exec --no-startup-id "~/.bin/scripts/ipython_calc/show_calc.sh", mode "default"
     bindsym d exec --no-startup-id $launcher, mode "default"
     bindsym f exec --no-startup-id "firefox", mode "default"
