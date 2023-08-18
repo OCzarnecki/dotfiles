@@ -70,6 +70,8 @@ alias gts='git status'
 alias gta='git add'
 alias gtp='git push'
 alias gtc='git commit'
+alias gtl='git log'
+alias gtd='git diff'
 alias fd.='fd .'
 
 # Path
