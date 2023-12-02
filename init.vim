@@ -69,6 +69,9 @@ Plug 'mattn/emmet-vim'
 "Fancy tables
 Plug 'dhruvasagar/vim-table-mode'
 
+"Java LSP, because it's *special*
+Plug 'mfussenegger/nvim-jdtls'
+
 call plug#end()
 " }}}
 
@@ -183,7 +186,14 @@ nvim_lsp.pylsp.setup{
     }
   }
 }
-nvim_lsp.jdtls.setup{}
+-- nvim_lsp.jdtls.setup{}
+
+-- Java (jdtls)
+-- local config = {
+    -- cmd = {'/usr/bin/jdtls'},
+    -- root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+-- }
+-- require('jdtls').start_or_attach(config)
 
 EOF
 
