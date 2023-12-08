@@ -10,6 +10,7 @@ ln -fbs "$SRC_DIR/secrets/i3-secrets" ~/.config/i3/i3-secrets
 # nvim
 mkdir -p ~/.config/nvim/
 ln -fbs "$SRC_DIR/init.vim" ~/.config/nvim/init.vim
+rm ~/.config/nvim/init.lua
 
 # XCompose
 ln -fbs "$SRC_DIR/XCompose" ~/.XCompose
