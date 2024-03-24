@@ -9,7 +9,7 @@ ln -fbs "$SRC_DIR/secrets/i3-secrets" ~/.config/i3/i3-secrets
 
 # nvim (lisp config)
 mkdir -p ~/.config/nvim/
-# ln -fbs "$SRC_DIR/init.vim" ~/.config/nvim/init.vim
+rm ~/.config/nvim/init.vim 2>/dev/null || true
 [ -f "$HOME/.config/nvim/init.vim" ] && rm ~/.config/nvim/init.vim
 ln -fbs "$SRC_DIR/init.lua" ~/.config/nvim/init.lua
 
