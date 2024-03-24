@@ -15,6 +15,8 @@ unsetopt beep
 # Use vi mode
 bindkey -v
 bindkey -v '^?' backward-delete-char
+bindkey jk vi-cmd-mode
+bindkey kj vi-cmd-mode
 
 
 # The following lines were added by compinstall
