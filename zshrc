@@ -84,10 +84,15 @@ function ez {
     (
         cd "$HOME/develop/dotfiles"
         "$EDITOR" "./zshrc"
-        echo -n "Commit message: zshrc: "
-        read msg
-        git add ./zshrc
-        git commit -m "zshrc: $msg"
+        echo -n "Commit msg [empty for no commit]: zshrc: "
+        read -e msg
+        echo "$msg" > msg.txt
+        if [ -n "$msg" ]; then
+            git add ./zshrc
+            git commit -m "zshrc: $msg"
+        else
+            echo "Skipping commit. There may be uncommitted changes in your dotfiles!"
+        fi
         source "$HOME/.zshrc"
     )
 }
