@@ -1,16 +1,15 @@
 #!/usr/bin/bash
 
-SRC_DIR=`pwd`
+SRC_DIR=$(pwd)
 
 # i3
 mkdir -p ~/.config/i3/
 ln -fbs "$SRC_DIR/i3-config" ~/.config/i3/config
 ln -fbs "$SRC_DIR/secrets/i3-secrets" ~/.config/i3/i3-secrets
 
-# nvim
+# nvim (lisp config)
 mkdir -p ~/.config/nvim/
-ln -fbs "$SRC_DIR/init.vim" ~/.config/nvim/init.vim
-rm ~/.config/nvim/init.lua
+ln -fbs "$SRC_DIR/init.lua" ~/.config/nvim/init.lua
 
 # XCompose
 ln -fbs "$SRC_DIR/XCompose" ~/.XCompose
