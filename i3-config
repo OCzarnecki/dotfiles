@@ -16,6 +16,7 @@ set $mod Mod4
 set $launcher rofi -modi drun -show drun
 set $laptop_screen eDP1
 set $extra_screen_1 DP1
+set $extra_screen_2 DP2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -151,6 +152,16 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ews1 "11"
+set $ews2 "12"
+set $ews3 "13"
+set $ews4 "14"
+set $ews5 "15"
+set $ews6 "16"
+set $ews7 "17"
+set $ews8 "18"
+set $ews9 "19"
+set $ews10 "20"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -163,6 +174,16 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+bindsym $mod+Control+1 workspace number $ews1
+bindsym $mod+Control+2 workspace number $ews2
+bindsym $mod+Control+3 workspace number $ews3
+bindsym $mod+Control+4 workspace number $ews4
+bindsym $mod+Control+5 workspace number $ews5
+bindsym $mod+Control+6 workspace number $ews6
+bindsym $mod+Control+7 workspace number $ews7
+bindsym $mod+Control+8 workspace number $ews8
+bindsym $mod+Control+9 workspace number $ews9
+bindsym $mod+Control+0 workspace number $ews10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -175,6 +196,16 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Control+Shift+1 move container to workspace number $ews1
+bindsym $mod+Control+Shift+2 move container to workspace number $ews2
+bindsym $mod+Control+Shift+3 move container to workspace number $ews3
+bindsym $mod+Control+Shift+4 move container to workspace number $ews4
+bindsym $mod+Control+Shift+5 move container to workspace number $ews5
+bindsym $mod+Control+Shift+6 move container to workspace number $ews6
+bindsym $mod+Control+Shift+7 move container to workspace number $ews7
+bindsym $mod+Control+Shift+8 move container to workspace number $ews8
+bindsym $mod+Control+Shift+9 move container to workspace number $ews9
+bindsym $mod+Control+Shift+0 move container to workspace number $ews10
 
 # lock screen
 bindsym $mod+Shift+v exec "bash -c 'xautolock -enable; sleep 0.5; xautolock -locknow'"
@@ -224,6 +255,7 @@ mode "launch" {
     bindsym o exec --no-startup-id "$HOME/.bin/scripts/choose-file-and-open zathura pdf", mode "default"
 	bindsym q exec --no-startup-id "systemctl poweroff", mode "default"
     bindsym r exec --no-startup-id "systemctl reboot", mode "default"
+    bindsym s exec --no-startup-id "~/develop/snippets/insert-snippet.sh", mode "default"
     bindsym t exec --no-startup-id "thunderbird", mode "default"
     bindsym v exec --no-startup-id "$HOME/.bin/scripts/choose-file-and-open vlc ''", mode "default"
     bindsym x exec --no-startup-id "killall Telegram Discord thunderbird liferea", mode "default"
@@ -249,16 +281,26 @@ bar {
 }
 
 # workspace screen assignment
-workspace 1 output $extra_screen_1
-workspace 2 output $extra_screen_1
-workspace 3 output $extra_screen_1
-workspace 4 output $extra_screen_1
-workspace 5 output $extra_screen_1
-workspace 6 output $extra_screen_1
-workspace 7 output $laptop_screen
-workspace 8 output $laptop_screen
-workspace 9 output $laptop_screen
-workspace 10 output $laptop_screen
+workspace $ws1 output $extra_screen_1
+workspace $ws2 output $extra_screen_1
+workspace $ws3 output $extra_screen_1
+workspace $ws4 output $extra_screen_1
+workspace $ws5 output $extra_screen_1
+workspace $ws6 output $extra_screen_1
+workspace $ws7 output $laptop_screen
+workspace $ws8 output $laptop_screen
+workspace $ws9 output $laptop_screen
+workspace $ws10 output $laptop_screen
+workspace $ews1 output $extra_screen_2
+workspace $ews2 output $extra_screen_2
+workspace $ews3 output $extra_screen_2
+workspace $ews4 output $extra_screen_2
+workspace $ews5 output $extra_screen_2
+workspace $ews6 output $extra_screen_2
+workspace $ews7 output $extra_screen_2
+workspace $ews8 output $extra_screen_2
+workspace $ews9 output $extra_screen_2
+workspace $ews10 output $extra_screen_2
 
 # Fix keyboard
 bindsym Shift+$mod+f exec xset r rate 250 50
