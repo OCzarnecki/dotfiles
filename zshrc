@@ -85,7 +85,7 @@ function ez {
         cd "$HOME/develop/dotfiles"
         "$EDITOR" "./zshrc"
         echo -n "Commit msg [empty for no commit]: zshrc: "
-        read -e msg
+        read msg
         if [ -n "$msg" ]; then
             git add ./zshrc
             git commit -m "zshrc: $msg"
@@ -98,4 +98,21 @@ function ez {
 
 function ac {
     source ./venv/bin/activate
+}
+
+function newdraft {
+    if [ $# -ne 1 ] ; then
+        echo "Usage: newdraft NAME-OF-POST"
+        return 1
+    fi
+    cd "$HOME/develop/pgwm/thedissonance.net/_drafts/"
+    fname="./$1.md"
+    echo "---
+title:
+layout: post
+date: $(date -Idate)
+---
+
+""" > $fname
+    $EDITOR $fname
 }
