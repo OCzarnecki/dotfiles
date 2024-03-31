@@ -105,8 +105,8 @@ function newdraft {
         echo "Usage: newdraft NAME-OF-POST"
         return 1
     fi
-    cd "$HOME/develop/pgwm/thedissonance.net/_drafts/"
-    fname="./$1.md"
+    cd "$HOME/develop/pgwm/thedissonance.net/"
+    fname="./_drafts/$1.md"
     echo "---
 title:
 layout: post
