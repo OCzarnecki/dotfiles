@@ -97,7 +97,7 @@ function ez {
 }
 
 function ac {
-    source ./venv/bin/activate
+    source ./.venv/bin/activate
 }
 
 function newdraft {
