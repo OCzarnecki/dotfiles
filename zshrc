@@ -121,3 +121,7 @@ function gtcp {
     git commit "${@}" || return 1
     git push
 }
+
+function watchpy {
+    fd --glob "*.{py,yaml,yml}" | entr "${@}"
+}
