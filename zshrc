@@ -118,6 +118,6 @@ date: $(date -Idate)
 }
 
 function gtcp {
-    git commit "${@}"
+    git commit "${@}" || return 1
     git push
 }
