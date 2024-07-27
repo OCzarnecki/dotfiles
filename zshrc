@@ -116,3 +116,8 @@ date: $(date -Idate)
 """ > $fname
     $EDITOR $fname
 }
+
+function gtcp {
+    git commit "${@}"
+    git push
+}
