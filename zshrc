@@ -78,7 +78,7 @@ alias fd.='fd .'
 
 # Path
 # export PATH="$HOME/.node_modules_global/bin:$PATH"
-export PATH="$PATH:$GEM_HOME/bin:$HOME/.bin:$HOME/.bin/scripts"
+# export PATH="$PATH:$GEM_HOME/bin:$HOME/.bin:$HOME/.bin/scripts"
 
 function ez {
     (
