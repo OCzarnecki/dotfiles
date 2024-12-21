@@ -56,7 +56,7 @@ fi
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export TERMINAL=alacritty
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+# export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 
 # Aliases
 alias cd..='cd ..'
