@@ -80,6 +80,7 @@ alias fd.='fd .'
 # export PATH="$HOME/.node_modules_global/bin:$PATH"
 export PATH="$PATH:$HOME/.bin/scripts"
 export PATH="$PATH:$HOME/.gem/ruby/3.3.0/bin/"
+export PATH="$PATH:$HOME/.rbenv/shims/"
 
 function ez {
     (
