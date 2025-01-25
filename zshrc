@@ -127,3 +127,7 @@ function gtcp {
 function watchpy {
     fd --glob "*.{py,yaml,yml}" | entr "${@}"
 }
+
+function dc {
+    deactivate
+}
