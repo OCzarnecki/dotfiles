@@ -10,17 +10,17 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Load things not published to dotfiles repo
-include ~/.config/i3/i3-secrets
-
 set $mod Mod4
 set $launcher rofi -modi drun -show drun
 set $laptop_screen eDP1
-set $extra_screen_1 DP1
+set $extra_screen_1 DP1-1
 set $extra_screen_2 DP2
+
+include ~/.config/i3/i3-secrets
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:sans 0
+font pango:sans 10
 
 # Colors
 # class                 border  backgr. text    indicator child_border
@@ -209,6 +209,7 @@ bindsym $mod+Control+Shift+0 move container to workspace number $ews10
 
 # lock screen
 bindsym $mod+Shift+v exec "bash -c 'xautolock -enable; sleep 0.5; xautolock -locknow'"
+bindsym $mod+BackSpace exec "bash -c 'cd $HOME/develop/dictation ; ./.venv/bin/python -m dictation toggle_transcribe'"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -217,7 +218,7 @@ bindsym $mod+Shift+x exec --no-startup-id "/usr/bin/alacritty -e $EDITOR $HOME/d
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your  X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -302,6 +303,9 @@ workspace $ews8 output $extra_screen_2
 workspace $ews9 output $extra_screen_2
 workspace $ews10 output $extra_screen_2
 
+# Assign classes to workspaces
+assign [class="^feh$"] $ws7
+
 # Fix keyboard
 bindsym Shift+$mod+f exec xset r rate 250 50
 
@@ -339,3 +343,6 @@ exec --no-startup-id .bin/scripts/update-cmus-cache
 
 # Pre-load ipython calc
 exec --no-startup-id .bin/scripts/ipython_calc/create_session.sh
+
+# Start dictation server
+exec --no-startup-id "bash -c 'cd $HOME/develop/dictation ; ./.venv/bin/python -m dictation serve'
