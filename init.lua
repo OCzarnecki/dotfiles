@@ -1,3 +1,5 @@
+local secrets = require("config.secrets")
+
 -- Lazy loader {{{
 -- Installation {{{
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -16,46 +18,51 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins {{{
 require("lazy").setup({
+    "dhruvasagar/vim-table-mode",
 	"nvim-telescope/telescope.nvim",
-        {
-            'nvim-orgmode/orgmode', -- {{{
-            dependencies = {
-              { 'nvim-treesitter/nvim-treesitter', lazy = true },
-            },
-            event = 'VeryLazy',
-            config = function()
-              -- Load treesitter grammar for org
-              require('orgmode').setup_ts_grammar()
-
-              -- Setup treesitter
-              require('nvim-treesitter.configs').setup({
-                highlight = {
-                  enable = true,
-                  additional_vim_regex_highlighting = { 'org' },
-                },
-                ensure_installed = { 'org' },
-              })
-
-              -- Setup orgmode
-              require('orgmode').setup({
-                org_agenda_files = '~/Sync/orgfiles/**/*',
-                org_default_notes_file = '~/Sync/orgfiles/refile.org',
-                org_todo_keywords = {
-                    "TODO(t)", "WAITING(w!)", "|", "WONTDO(x!)", "DONE(d!)"
-                },
-                org_log_done = 'note',
-                org_log_into_drawer = 'LOGBOOK',
-              })
-            end, -- }}}
+	"nvim-orgmode/telescope-orgmode.nvim",
+    {
+        'nvim-orgmode/orgmode', -- {{{
+        event = 'VeryLazy',
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
         },
+        config = function()
+          -- Setup orgmode
+          require('orgmode').setup({
+            org_agenda_files = '~/Sync/orgfiles/**/*',
+            org_capture_templates = {
+                t = {
+                    description = 'Task',
+                    template = '* TODO %?\n %u',
+                },
+                f = {
+                    description = 'Forecast',
+                    template = '\n  :FORECAST:\n  :TITLE: %^{Question|Question}\n  :CHOICES:  %^{Choices|binary}\n  :PREDICTION: %U %?\n  :END:',
+                    target = '~/Sync/orgfiles/forecasts.org',
+                    headline = "Forecasts to Refile"
+                },
+            },
+            org_default_notes_file = '~/Sync/orgfiles/refile.org',
+            org_todo_keywords = {
+                "TODO(t)", "WAITING(w!)", "|", "WONTDO(x!)", "DONE(d!)"
+            },
+            org_log_done = 'note',
+            -- org_log_into_drawer = 'LOGBOOK',
+          })
+        end, -- }}}
+    },
 	"nvim-lua/plenary.nvim",
 	"neovim/nvim-lspconfig",
 	"hrsh7th/nvim-cmp",
+	"hrsh7th/cmp-emoji",
 	"hrsh7th/cmp-nvim-lsp",
 	"hrsh7th/cmp-path",
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/vim-vsnip",
     "simrat39/rust-tools.nvim",
+    "pasky/claude.vim",
+    "windwp/nvim-autopairs",
 })
 -- }}}
 -- }}}
@@ -69,6 +76,7 @@ o.shiftwidth = 4
 o.autoindent = true
 o.smartindent = true
 o.signcolumn = 'yes'  -- You can take the config file out of the vim script...
+o.shortmess = o.shortmess .. "I"
 
 vim.g.mapleader = " "
 
@@ -76,16 +84,25 @@ vim.g.mapleader = " "
 
 -- Filetype specific settings {{{
 local autocmd = vim.api.nvim_create_autocmd
-autocmd('FileType lua', {
+autocmd('FileType', {
+    pattern = 'lua',
     once = true,
     callback = function(args)
         vim.api.nvim_set_option_value('foldmethod', 'marker', { scope = 'local'})
     end,
 })
-autocmd('FileType vim', {
+autocmd('FileType', {
+    pattern = 'vim',
     once = true,
     callback = function(args)
         vim.api.nvim_set_option_value('foldmethod', 'marker', { scope = 'local'})
+    end,
+})
+autocmd('FileType', {
+    pattern = 'org',
+    once = true,
+    callback = function(args)
+        vim.api.nvim_set_option_value('foldtext', "v:folddashes.substitute(getline(v:foldstart),'^*\\+','','g')", { scope = 'local'})
     end,
 })
 -- }}}
@@ -123,6 +140,8 @@ cmp.setup({
         option = { keyword_pattern = [[\k\+]] },
     },
     { name = 'nvim_lsp' },
+    { name = 'orgmode' },
+    { name = 'emoji' },
   },
 })
 
@@ -183,6 +202,7 @@ nvim_lsp.pylsp.setup{
             'E265', -- Block comment must start with '# '
             'E501', -- Line too long
             'E701', -- Multiple statements on one line
+            'E704', -- Multiple statements on one line
             'E731', -- Cannot assign λ to variable
             'E741', -- Variables can't be named l or I
           },
@@ -192,6 +212,7 @@ nvim_lsp.pylsp.setup{
   },
   capabilities = cmp_capatilities 
 }
+nvim_lsp.kotlin_language_server.setup{}
 -- nvim_lsp.jdtls.setup{}
 
 -- Java (jdtls)
@@ -202,19 +223,18 @@ nvim_lsp.pylsp.setup{
 -- require('jdtls').start_or_attach(config)
 -- }}}
 
-
 -- Mappings {{{
 --
 local map = vim.api.nvim_set_keymap
 options = { noremap = true, silent = true }
 
 -- Generic {{{
-map('n', '<leader>ev', '<cmd>vsplit $MYVIMRC<cr>', options)
+map('n', '<leader>ev', '<cmd>tabnew $MYVIMRC<cr>', options)
 map('n', '<leader>sv', '<cmd>source $MYVIMRC<cr>', options)
+map('v', '<C-c>', '"+y', options)
 map('i', 'jk', '<Esc>', options)
 map('i', 'kj', '<Esc>', options)
 -- }}}
-
 -- Telescope {{{
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', options)
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', options)
@@ -239,5 +259,24 @@ map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', options)
 -- Org mode {{{
 map('n', '<leader>oW', '<cmd>tabnew $HOME/Sync/orgfiles/main.org<cr>', options)
 map('n', '<leader>oR', '<cmd>tabnew $HOME/Sync/orgfiles/refile.org<cr>', options)
+
+vim.keymap.set('i', '<C-Return>', '<cmd>lua require("orgmode").action("org_mappings.meta_return")<CR>')
+
+local ts = require('telescope')
+ts.setup()
+ts.load_extension('orgmode')
+vim.keymap.set('n', '<leader>r', ts.extensions.orgmode.refile_heading)
+vim.keymap.set('n', '<leader>fo', ts.extensions.orgmode.search_headings)
+vim.keymap.set('n', '<leader>li', ts.extensions.orgmode.insert_link)
+
 -- }}}
+-- }}}
+
+
+-- Claude {{{
+vim.g.claude_api_key = secrets.claude_api_key
+-- }}}
+
+-- Autopairs {{{
+require("nvim-autopairs").setup {}
 -- }}}

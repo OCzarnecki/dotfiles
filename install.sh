@@ -8,8 +8,10 @@ ln -fbs "$SRC_DIR/i3-config" ~/.config/i3/config
 ln -fbs "$SRC_DIR/secrets/i3-secrets" ~/.config/i3/i3-secrets
 
 # nvim (lisp config)
-mkdir -p ~/.config/nvim/
+mkdir -p ~/.config/nvim/lua/config
 ln -fbs "$SRC_DIR/init.lua" ~/.config/nvim/init.lua
+ln -fbs "$SRC_DIR/config.lua" ~/.config/nvim/lua/config.lua
+ln -fbs "$SRC_DIR/secrets/nvim-secrets.lua" ~/.config/nvim/lua/config/secrets.lua
 
 # XCompose
 ln -fbs "$SRC_DIR/XCompose" ~/.XCompose
