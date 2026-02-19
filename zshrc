@@ -152,3 +152,4 @@ esac
 # Meticulous
 export PATH="$HOME/.local/bin:$PATH"
 export METICULOUS_API_URL=http://webapp-backend-production-meticulous-webapp-backend-admin:3000/api
+source "$HOME/dev/meticulous/scripts/shell.sh"
