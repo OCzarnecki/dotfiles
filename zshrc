@@ -41,11 +41,19 @@ setopt nopromptcr
 
 # Fuzzy Search
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+# if [ -f /usr/share/fzf/key-bindings.zsh ] ; then
+# 	source /usr/share/fzf/key-bindings.zsh
+# 	source /usr/share/fzf/completion.zsh
+# fi
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+source <(fnm env)
 
 # ssh agent
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+if ! pgrep -u "$USER" ssh-agent > /dev/null && [ -f $XDG_RUNTIME_DIR/ssh-agent.env ]; then
   ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
 if [[ ! -f "SSH_AUTH_SOCK" ]]; then
@@ -77,10 +85,11 @@ alias gtd='git diff'
 alias fd.='fd .'
 
 # Path
-# export PATH="$HOME/.node_modules_global/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.bin/scripts"
 export PATH="$PATH:$HOME/.gem/ruby/3.3.0/bin/"
 export PATH="$PATH:$HOME/.rbenv/shims/"
+export PATH="$PATH:$HOME/dev/meticulous/scripts/bin/"
 
 function ez {
     (
@@ -131,3 +140,15 @@ function watchpy {
 function dc {
     deactivate
 }
+
+# pnpm
+export PNPM_HOME="/Users/olaf/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Meticulous
+export PATH="$HOME/.local/bin:$PATH"
+export METICULOUS_API_URL=http://webapp-backend-production-meticulous-webapp-backend-admin:3000/api
