@@ -144,7 +144,7 @@ function dc {
 function gtnb {
     git fetch
     git checkout origin/main
-    git switch -c $1
+    git switch -c "olaf/$1"
 }
 
 # pnpm
