@@ -141,6 +141,12 @@ function dc {
     deactivate
 }
 
+function gtnb {
+    git fetch
+    git checkout origin/main
+    git switch -c $1
+}
+
 # pnpm
 export PNPM_HOME="/Users/olaf/Library/pnpm"
 case ":$PATH:" in
