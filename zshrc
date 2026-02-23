@@ -147,6 +147,11 @@ function gtnb {
     git switch -c "olaf/$1"
 }
 
+function grom {
+    git fetch
+    git rebase origin/main
+}
+
 # pnpm
 export PNPM_HOME="/Users/olaf/Library/pnpm"
 case ":$PATH:" in
