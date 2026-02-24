@@ -148,6 +148,12 @@ function gtnb {
 }
 
 function grom {
+    echo "Warning! Use gmom, non grom!"
+    git fetch
+    git merge origin/main
+}
+
+function gmom {
     git fetch
     git merge origin/main
 }
