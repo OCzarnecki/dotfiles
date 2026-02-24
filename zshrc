@@ -158,6 +158,11 @@ function gmom {
     git merge origin/main
 }
 
+function fixlock {
+    git checkout HEAD -- pnpm-lock.yaml
+    pnpm install
+}
+
 # pnpm
 export PNPM_HOME="/Users/olaf/Library/pnpm"
 case ":$PATH:" in
