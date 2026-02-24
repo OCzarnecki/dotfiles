@@ -161,6 +161,7 @@ function gmom {
 function fixlock {
     git checkout HEAD -- pnpm-lock.yaml
     pnpm install
+    git add pnpm-lock.yaml
 }
 
 # pnpm
