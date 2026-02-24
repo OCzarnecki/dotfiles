@@ -149,7 +149,7 @@ function gtnb {
 
 function grom {
     git fetch
-    git rebase origin/main
+    git merge origin/main
 }
 
 # pnpm
