@@ -89,7 +89,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.bin/scripts"
 export PATH="$PATH:$HOME/.gem/ruby/3.3.0/bin/"
 export PATH="$PATH:$HOME/.rbenv/shims/"
-export PATH="$PATH:$HOME/dev/meticulous/scripts/bin/"
+export PATH="$PATH:$HOME/dev/scripts"
 
 function ez {
     (
