@@ -164,6 +164,12 @@ function fixlock {
     git add pnpm-lock.yaml
 }
 
+function unset_aws {
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SESSION_TOKEN
+}
+
 # pnpm
 export PNPM_HOME="/Users/olaf/Library/pnpm"
 case ":$PATH:" in
