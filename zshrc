@@ -34,11 +34,14 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 prompt walters
+_BASE_PROMPT="$PROMPT"
 
 # Show AWS_PROFILE in prompt when set
 function _aws_prompt_info() {
     if [[ -n "$AWS_PROFILE" ]]; then
-        PROMPT="[aws:${AWS_PROFILE}] ${PROMPT}"
+        PROMPT="[🟠 ${AWS_PROFILE}] ${_BASE_PROMPT}"
+    else
+        PROMPT="${_BASE_PROMPT}"
     fi
 }
 autoload -Uz add-zsh-hook
@@ -62,10 +65,10 @@ source <(fzf --zsh)
 source <(fnm env)
 
 # ssh agent
-if ! pgrep -u "$USER" ssh-agent > /dev/null && [ -f $XDG_RUNTIME_DIR/ssh-agent.env ]; then
+if ! pgrep -u "$USER" ssh-agent > /dev/null && [[ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]]; then
   ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
-if [[ ! -f "SSH_AUTH_SOCK" ]]; then
+if [[ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]]; then
   source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
