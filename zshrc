@@ -183,6 +183,10 @@ function unset_aws {
     unset AWS_SESSION_TOKEN
 }
 
+function fastbuild {
+    turbo run build --filter @alwaysmeticulous/$1...
+}
+
 # pnpm
 export PNPM_HOME="/Users/olaf/Library/pnpm"
 case ":$PATH:" in
