@@ -35,6 +35,15 @@ compinit
 promptinit
 prompt walters
 
+# Show AWS_PROFILE in prompt when set
+function _aws_prompt_info() {
+    if [[ -n "$AWS_PROFILE" ]]; then
+        PROMPT="[aws:${AWS_PROFILE}] ${PROMPT}"
+    fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _aws_prompt_info
+
 # If the last output line didn't end with a new line, don't overwrite it
 # (must be set after theme)
 setopt nopromptcr
