@@ -39,7 +39,7 @@ _BASE_PROMPT="$PROMPT"
 # Show AWS_PROFILE in prompt when set
 function _aws_prompt_info() {
     if [[ -n "$AWS_PROFILE" ]]; then
-        PROMPT="[🟠 ${AWS_PROFILE}] ${_BASE_PROMPT}"
+        PROMPT="[%{🟠%G%} ${AWS_PROFILE}] ${_BASE_PROMPT}"
     else
         PROMPT="${_BASE_PROMPT}"
     fi
