@@ -1,23 +1,23 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 SRC_DIR=$(pwd)
 
 # i3
 mkdir -p ~/.config/i3/
-ln -fbs "$SRC_DIR/i3-config" ~/.config/i3/config
-ln -fbs "$SRC_DIR/secrets/i3-secrets" ~/.config/i3/i3-secrets
+ln -sf "$SRC_DIR/i3-config" ~/.config/i3/config
+ln -sf "$SRC_DIR/secrets/i3-secrets" ~/.config/i3/i3-secrets
 
 # nvim (lisp config)
 mkdir -p ~/.config/nvim/lua/config
-ln -fbs "$SRC_DIR/init.lua" ~/.config/nvim/init.lua
-ln -fbs "$SRC_DIR/config.lua" ~/.config/nvim/lua/config.lua
-ln -fbs "$SRC_DIR/secrets/nvim-secrets.lua" ~/.config/nvim/lua/config/secrets.lua
+ln -sf "$SRC_DIR/init.lua" ~/.config/nvim/init.lua
+ln -sf "$SRC_DIR/config.lua" ~/.config/nvim/lua/config.lua
+ln -sf "$SRC_DIR/secrets/nvim-secrets.lua" ~/.config/nvim/lua/config/secrets.lua
 
 # XCompose
-ln -fbs "$SRC_DIR/XCompose" ~/.XCompose
+ln -sf "$SRC_DIR/XCompose" ~/.XCompose
 
 # zsh
-ln -fbs "$SRC_DIR/zshrc" ~/.zshrc
+ln -sf "$SRC_DIR/zshrc" ~/.zshrc
 
 echo "User configuration installed!"
 

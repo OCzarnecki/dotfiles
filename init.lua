@@ -1,4 +1,5 @@
-local secrets = require("config.secrets")
+local ok, secrets = pcall(require, "config.secrets")
+if not ok then secrets = {} end
 
 -- Lazy loader {{{
 -- Installation {{{
@@ -60,7 +61,7 @@ require("lazy").setup({
 	"hrsh7th/cmp-path",
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/vim-vsnip",
-    "simrat39/rust-tools.nvim",
+    -- "simrat39/rust-tools.nvim",
     "pasky/claude.vim",
     "windwp/nvim-autopairs",
 })
@@ -150,70 +151,44 @@ local cmp_capatilities = require('cmp_nvim_lsp').default_capabilities()
 -- }}}
 
 -- LSP config {{{
--- nvim_lsp object
-local nvim_lsp = require'lspconfig'
+-- vim.lsp.config (nvim 0.11+)
+vim.lsp.config('*', { capabilities = cmp_capatilities })
 
-local rust_opts = {
-    tools = {
-        autoSetHints = true,
-        -- deprecated
-        -- hover_with_actions = true,
-        runnables = {
-            use_telescope = true
-        },
-        inlay_hints = {
-            show_parameter_hints = false,
-            parameter_hints_prefix = "",
-            other_hints_prefix = "",
-        },
-    },
+vim.lsp.config('rust_analyzer', {
+    settings = {
+        ["rust-analyzer"] = {
+            checkOnSave = {
+                command = "clippy"
+            },
+        }
+    }
+})
 
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    server = {
-        -- on_attach is a callback called when the language server attachs to the buffer
-        -- on_attach = on_attach,
-        settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                -- enable clippy on save
-                checkOnSave = {
-                    command = "clippy"
-                },
+vim.lsp.config('pylsp', {
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = {
+                        'W503', -- Line break before binary operator
+                        'W391', -- Blank line at the end of file
+                        'E265', -- Block comment must start with '# '
+                        'E501', -- Line too long
+                        'E701', -- Multiple statements on one line
+                        'E704', -- Multiple statements on one line
+                        'E731', -- Cannot assign λ to variable
+                        'E741', -- Variables can't be named l or I
+                    },
+                }
             }
         }
     },
-}
+})
 
-require('rust-tools').setup(rust_opts)
-nvim_lsp.bashls.setup{ capabilities = cmp_capatilities }
-nvim_lsp.gopls.setup{ capabilities = cmp_capatilities }
-nvim_lsp.texlab.setup{ capabilities = cmp_capatilities }
-nvim_lsp.pylsp.setup{
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = {
-            'W503', -- Line break before binary operator
-            'W391', -- Blank line at the end of file
-            'E265', -- Block comment must start with '# '
-            'E501', -- Line too long
-            'E701', -- Multiple statements on one line
-            'E704', -- Multiple statements on one line
-            'E731', -- Cannot assign λ to variable
-            'E741', -- Variables can't be named l or I
-          },
-        }
-      }
-    }
-  },
-  capabilities = cmp_capatilities 
-}
-nvim_lsp.kotlin_language_server.setup{}
--- nvim_lsp.jdtls.setup{}
+vim.lsp.enable({
+    'bashls', 'gopls', 'texlab', 'ts_ls', 'astro',
+    'rust_analyzer', 'pylsp', 'kotlin_language_server',
+})
 
 -- Java (jdtls)
 -- local config = {
@@ -234,6 +209,19 @@ map('n', '<leader>sv', '<cmd>source $MYVIMRC<cr>', options)
 map('v', '<C-c>', '"+y', options)
 map('i', 'jk', '<Esc>', options)
 map('i', 'kj', '<Esc>', options)
+
+vim.keymap.set("n", "<leader>gb", function()
+  local file = vim.fn.expand("%")
+  if file == "" then
+    vim.notify("No file in current buffer", vim.log.levels.WARN)
+    return
+  end
+  vim.cmd("tabnew")
+  vim.cmd("read !git blame " .. vim.fn.shellescape(file))
+  vim.bo.buftype = "nofile"
+  vim.bo.modifiable = false
+  vim.bo.filetype = "fugitiveblame"
+end, { desc = "Git blame in new tab" })
 -- }}}
 -- Telescope {{{
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', options)
@@ -270,11 +258,42 @@ vim.keymap.set('n', '<leader>fo', ts.extensions.orgmode.search_headings)
 vim.keymap.set('n', '<leader>li', ts.extensions.orgmode.insert_link)
 
 -- }}}
+
+-- Claude Code {{{
+local function spawn_claude()
+  local selection = nil
+  if vim.fn.mode():match("[vV\22]") then
+    local start_pos = vim.fn.getpos("v")
+    local end_pos = vim.fn.getpos(".")
+    local lines = vim.fn.getregion(start_pos, end_pos, { type = vim.fn.mode() })
+    selection = table.concat(lines, "\n")
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+  end
+
+  vim.ui.input({ prompt = "Claude prompt: " }, function(input)
+    if not input or input == "" then return end
+
+    local prompt = input
+    local filepath = vim.api.nvim_buf_get_name(0)
+    if filepath ~= "" then
+      prompt = prompt .. "\n\nThe user had the following file open: " .. vim.fn.fnamemodify(filepath, ":p")
+        .. "\nNote that the user's query could be general and not related to the current file."
+    end
+    if selection then
+      prompt = prompt .. "\n\nThe user had the following text selected:\n```\n" .. selection .. "\n```"
+    end
+
+    vim.fn.jobstart({ "/Users/olaf/dev/scripts/spawn-claude", prompt }, { detach = true })
+  end)
+end
+
+vim.keymap.set({"n", "v"}, "<leader>gc", spawn_claude, { desc = "Spawn Claude with prompt" })
+-- }}}
 -- }}}
 
 
 -- Claude {{{
-vim.g.claude_api_key = secrets.claude_api_key
+-- vim.g.claude_api_key = secrets.claude_api_key
 -- }}}
 
 -- Autopairs {{{
